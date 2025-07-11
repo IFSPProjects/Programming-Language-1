@@ -1,32 +1,33 @@
 package object;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class BaseTask {
     private String text;
     private Boolean isCompleted;
-    private ZonedDateTime taskChangeDate;
-    private int internalID;
+    private LocalDateTime taskChangeDate;
+    private final int internalID;
     // private final UUID taskID;
 
     public BaseTask() {
         text = "";
         isCompleted = false;
-        taskChangeDate = ZonedDateTime.now();
-        // taskID = new UUID(32,32);
+        taskChangeDate = LocalDateTime.now();
+        internalID = 0;
     }
     public BaseTask(String text) {
         this.text = text;
         isCompleted = false;
-        taskChangeDate = ZonedDateTime.now();
-        // taskID = new UUID(32,32);
+        taskChangeDate = LocalDateTime.now();
+        internalID = 0;
     }
-    public BaseTask(String text, Boolean isCompleted, ZonedDateTime date) {
+    public BaseTask(String text, Boolean isCompleted, LocalDateTime date, int internalID) {
         this.text = text;
         this.isCompleted = isCompleted;
         this.taskChangeDate = date;
-        // taskID = new UUID(32,32);
+        this.internalID = internalID;
     }
 
     public void setText(String text) {
@@ -39,7 +40,7 @@ public class BaseTask {
         updateTaskDate();
     }
 
-    public ZonedDateTime getDate() {
+    public LocalDateTime getDate() {
         return taskChangeDate;
     }
 
@@ -51,15 +52,11 @@ public class BaseTask {
         return text;
     }
 
-    /* public UUID getTaskID() {
-        return taskID;
-    } */
-
     public int getInternalID() {
         return internalID;
     }
 
     private void updateTaskDate() {
-        taskChangeDate = ZonedDateTime.now();
+        taskChangeDate = LocalDateTime.now();
     }
 }
